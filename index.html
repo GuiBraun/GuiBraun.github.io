@@ -1,1 +1,42 @@
-SALVEEEE
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <title>CRUD</title>
+</head>
+<body>    
+    
+   
+    <input type="text" 
+           placeholder="Nome"/>
+    
+    <button type="button"
+    >Salvar</button>
+
+    <ol id="ListaDeImpressao">
+       <li>Olá</li>
+       <li>Olá</li>
+       <li>Olá</li>
+    </ol>
+
+    
+    <div></div> 
+    <script type="text/javascript">
+     
+     var listaDeNomes = ['Volpi','Brazil'];
+
+     var listaDeImpressao =
+     document.getElementById('ListaDeImpressao');
+
+     ListaDeImpressao.innerHTML = '<li>Novo elemento</li>';
+
+     listaDeNomes.forEach(function(item){
+
+      console.log(item);
+     });   
+        
+    </script>
+</body>
+</html>
