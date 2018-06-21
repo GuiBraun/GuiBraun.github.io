@@ -1,42 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial scale=1.0">
+  <meta name="viewport" content="width=device-width, initial scale=.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta charset="UTF-8">
   <title>CRUD</title>
+
+  <style type="text/css">
+    
+    #nome {
+      font-family: monospace;
+    }
+
+    .estilo-link:hover {
+      color: red;
+      text-decoration: none;
+
+    }
+
+    button {
+      color: green;
+    }
+
+    button:hover {
+      color: red;
+    }
+
+  </style>
 </head>
-<body>    
+<body style="background-color: #ccc; color: #333">
     
-   
-    <input type="text" 
-           placeholder="Nome"/>
+    <span style="font-size: 18px; font-weight: bold;">Nome:</span>          
+    <input type="text"    
+           id="nome" 
+           onkeypress="adicionarViaEnter(event)"
+           placeholder="Nome"
+           style="width: 300px" />
     
-    <button type="button"
-    >Salvar</button>
-
-    <ol id="ListaDeImpressao">
-       <li>Olá</li>
-       <li>Olá</li>
-       <li>Olá</li>
-    </ol>
-
+     <button type="button" 
+             onclick="adicionar()">Salvar</button>
     
-    <div></div> 
+    <ol style="text-align: center" id="listaDeImpressao"></ol>
+    
     <script type="text/javascript">
-     
-     var listaDeNomes = ['Volpi','Brazil'];
-
-     var listaDeImpressao =
-     document.getElementById('ListaDeImpressao');
-
-     ListaDeImpressao.innerHTML = '<li>Novo elemento</li>';
-
-     listaDeNomes.forEach(function(item){
-
-      console.log(item);
-     });   
         
+        var listaDeNomes = [];
+        var indice = null;
+        
+        var listaDeImpressao = document.getElementById('listaDeImpressao');
+        var valorDoInput = document.getElementById('nome');
+        function adicionar(){
+          if(valorDoInput.value != ''){
+
+            document.body.style.backgroundColor = 
+              valorDoInput.value;
+
+            if(indice == null){
+
+            listaDeNomes.push(valorDoInput.value);
+          }else{
+            listaDeNomes[indice] = valorDoInput.value;
+          }
+            impressao();
+            valorDoInput.value = '';  
+          }          
+        }
+        function limpar(){
+          listaDeImpressao.innerHTML = '';
+          indice = null;
+        }
+
+        function adicionarViaEnter(event){
+          if(event.keyCode == 13){
+            adicionar();
+          }
+        }
+        function remover(idx){          
+          listaDeNomes.splice(idx, 1);
+          impressao();
+        }
+
+        function editar(idx){
+          indice = idx;
+          valorDoInput.value = listaDeNomes[idx];
+
+        }
+
+        function impressao(){
+          limpar();
+          listaDeNomes.forEach(function(item, idx){
+            listaDeImpressao.innerHTML = listaDeImpressao.innerHTML +  '<li>' + 
+                  '<a class="estilo-link"href="javascript:void(0)" onclick="editar(\'' + idx + '\')"ondblclick="remover(\'' + idx + '\')">' + item + '</a>' +
+                '</li>';
+          });  
+        }        
     </script>
 </body>
 </html>
